@@ -1,0 +1,9 @@
+4. Jetzt will die 3. Instanz dem Host etwas senden:
+
+{
+"tx_instance" : "instance3",
+"tx_host" : "host1",
+"tx_source" : "source2",
+"rx_host" : "host3",
+"Beispiel Schluesselwort" : "Beispiel Wert"
+}

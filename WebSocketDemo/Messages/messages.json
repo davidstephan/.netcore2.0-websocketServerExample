@@ -1,0 +1,37 @@
+{
+	"contrast": "0.900000",
+	"event": "change",
+	"uid": "EviInstance0001"
+}
+
+
+// from 1 to 2
+{
+	"tx_source": "source1",
+	"rx_source": "source2",
+	"tx_host": "host1",
+	"rx_host": "host2",
+	"tx_instance": "instance1",
+	"rx_instance": "instance2"
+}
+
+// from 1 to 3
+{
+	"tx_source": "source1",
+	"rx_source": "source3",
+	"tx_host": "host1",
+	"rx_host": "host3",
+	"tx_instance": "instance1",
+	"rx_instance": "instance3"
+}
+
+
+// from 3 to 1
+{
+	"tx_source": "source3",
+	"rx_source": "source1",
+	"tx_host": "host3",
+	"rx_host": "host1",
+	"tx_instance": "instance3",
+	"rx_instance": "instance1"
+}

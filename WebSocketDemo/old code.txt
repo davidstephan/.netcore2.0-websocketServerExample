@@ -1,0 +1,136 @@
+			/*
+			JsonMessage jsonMessage = new JsonMessage();
+			string deserialized = message;
+			if (deserialized.StartsWith("{") && deserialized.EndsWith("}"))
+			{
+				deserialized = deserialized.Replace("{", "").Replace("}", "").Trim();
+				string[] keyValuePairs = deserialized.Split(",");
+				foreach (string keyValuePairRaw in keyValuePairs)
+				{
+					string[] keyValuePair = keyValuePairRaw.Split(":");
+					if (keyValuePair.Count() == 2)
+					{
+						string key = keyValuePair[0].Trim().Replace("\"", "");
+						var value = keyValuePair[1].Trim().Replace("\"", "");
+
+						if (key == "contrast")
+						{
+							jsonMessage.Contrast = value;
+						}
+
+						if (key == "event")
+						{
+							jsonMessage.Event = value;
+						}
+
+						if (key == "source")
+						{
+							jsonMessage.Source = value;
+						}
+					}
+				}
+			}
+			else
+			{
+				Debug.WriteLine("THIS WAS NOT A JSON MESSAGE");
+				await SendMessageToAllAsync("THIS WAS NOT A JSON MESSAGE");
+			}
+
+			//add to evi list
+			if (jsonMessage.Source == "evi")
+			{
+				//if not in the list yet, add to list
+				if (!RegisteredSockets.Evi.Contains(WebSocketConnectionManager.GetId(socket)))
+				{
+					RegisteredSockets.Evi.Add(WebSocketConnectionManager.GetId(socket));
+					Debug.WriteLine($"Number of registered EVI instances: {RegisteredSockets.Evi.Count}");
+					RegisteredSockets.Evi.ForEach(i => Debug.WriteLine("{0}\t", i));
+
+
+				}
+			}
+
+			//add to client list
+			if (jsonMessage.Source == "client")
+			{
+				//if not in the list yet, add to list
+				if (!RegisteredSockets.Client.Contains(WebSocketConnectionManager.GetId(socket)))
+				{
+					RegisteredSockets.Client.Add(WebSocketConnectionManager.GetId(socket));
+					Debug.WriteLine($"Number of registered Client instances: {RegisteredSockets.Client.Count}");
+					RegisteredSockets.Client.ForEach(i => Debug.WriteLine("{0}\t", i));
+				}
+			}
+
+			//if it is a login event, this will cause a broadcast to all sockets
+			if (jsonMessage.Event == "login")
+			{
+				await SendMessageToAllAsync(message);
+			}
+
+			//if it is a change event, this will be sent to all evi Instances
+			//TODO change events only to the adressed Evi instance
+			if (jsonMessage.Event == "change")
+			{
+				foreach (string element in RegisteredSockets.Evi)
+				{
+					await SendMessageAsync(element, message);
+				}
+			}
+
+			//if it is a acknowledgement event, this will be sent to all Clients
+			if (jsonMessage.Event == "ack")
+			{
+				foreach (string element in RegisteredSockets.Client)
+				{
+					await SendMessageAsync(element, message);
+				}
+			}
+
+			// debug messages
+//			Debug.WriteLine("jsonMessage.Source = " + jsonMessage.Source);
+//			Debug.WriteLine("jsonMessage.Event = " + jsonMessage.Event);
+//			Debug.WriteLine("jsonMessage.Contrast = " + jsonMessage.Contrast);
+*/
+
+
+System.InvalidOperationException
+  HResult=0x80131509
+  Message=Sequence contains no matching element
+  Source=System.Linq
+  StackTrace:
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 61
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 176
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at WebSocketServer.WebSockets.WebSocketManagerMiddleware.<>c__DisplayClass6_0.<<Invoke>b__0>d.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\WebSocketManagerMiddleware.cs:line 43
+
+
+   System.InvalidOperationException
+  HResult=0x80131509
+  Message=Sequence contains no matching element
+  Source=System.Linq
+  StackTrace:
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 61
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 176
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at WebSocketServer.WebSockets.WebSocketManagerMiddleware.<>c__DisplayClass6_0.<<Invoke>b__0>d.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\WebSocketManagerMiddleware.cs:line 43
+
+
+   System.InvalidOperationException
+  HResult=0x80131509
+  Message=Sequence contains no matching element
+  Source=System.Linq
+  StackTrace:
+   at System.Linq.Enumerable.First[TSource](IEnumerable`1 source, Func`2 predicate)
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 61
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at WebSocketServer.WebSockets.EviWebSocketHandler.<ReceiveAsync>d__1.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\EviWebSocketHandler.cs:line 170
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at WebSocketServer.WebSockets.WebSocketManagerMiddleware.<>c__DisplayClass6_0.<<Invoke>b__0>d.MoveNext() in C:\Users\David\SynologyDrive\MT Bachelor\MT14 TVP\repos\EviWebSocketServer\WebSocketDemo\WebSockets\WebSocketManagerMiddleware.cs:line 43

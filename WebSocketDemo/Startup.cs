@@ -1,49 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using WebSocketDemo.WebSockets;
+using WebSocketServer.WebSockets;
 
-namespace WebSocketDemo
+namespace WebSocketServer
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddWebSocketManager();
-            services.AddMvc();
-        }
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddWebSocketManager();
+			services.AddMvc();
+		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            var wsOptions = new WebSocketOptions()
-            {
-                KeepAliveInterval = TimeSpan.FromSeconds(60),
-                ReceiveBufferSize = 4 * 1024
-            };
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		// this method will respond to each incoming HTTP request.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
+		{
+			loggerFactory
+				.AddConsole()
+				.AddDebug();
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
+			var wsOptions = new WebSocketOptions()
+			{
+				KeepAliveInterval = TimeSpan.FromSeconds(60),
+				ReceiveBufferSize = 4 * 1024
+			};
 
-            app.UseWebSockets(wsOptions);
-            app.MapWebSocketManager("/chat", serviceProvider.GetService<ChatRoomHandler>());
-            app.UseMvc();
-        }
-    }
+			app.UseStaticFiles();
+
+			app.UseWebSockets(wsOptions);
+
+			app.MapWebSocketManager("/api", serviceProvider.GetService<EviWebSocketHandler1>());
+			//app.MapWebSocketManager("/contrast", serviceProvider.GetService<EviWebSocketHandler1>());
+
+			app.UseMvc();
+		}
+	}
 }

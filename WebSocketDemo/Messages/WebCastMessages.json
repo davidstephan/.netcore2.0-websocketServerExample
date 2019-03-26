@@ -1,0 +1,22 @@
+{
+	"tx_Instance" : "instance1",
+	"tx_Host" : "host1",
+	"tx_Source" : "source1",
+    "Event" : "login"
+}
+
+{
+	"tx_Instance" : "instance2",
+	"tx_Host" : "host1",
+	"tx_Source" : "source2",
+    "Event" : "login"
+}
+
+{
+	"tx_Instance" : "instance2",
+	"tx_Host" : "host1",
+	"tx_Source" : "source2",
+    "rx_Source" : "source1",
+    "Event" : "change",
+    "Contrast" : "2"
+}

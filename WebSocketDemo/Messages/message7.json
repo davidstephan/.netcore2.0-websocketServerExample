@@ -1,0 +1,10 @@
+6. Instanz 1 möchte bei Instanz 3 den neuen Contrast bestätigen
+
+{
+"tx_instance" : "instance1",
+"tx_host" : "host1",
+"tx_source" : "source1",
+	"rx_instance": "instance3",
+	"event" :  "acknowledgement" 
+"Contrast" : "1.4667"
+}

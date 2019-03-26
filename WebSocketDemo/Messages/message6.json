@@ -1,0 +1,10 @@
+6. Instanz 3 möchte bei Instanz 1 den Contrast aendern
+
+{
+	"tx_instance" : "instance3",
+	"tx_host" : "host1",
+	"tx_source" : "source2",
+	"rx_instance" : "instance1",
+	"event" :  "change", 
+	"Contrast" : "1.4667"
+}
