@@ -45,6 +45,11 @@ namespace WebSocketServer
 
 			app.UseWebSockets(wsOptions);
 
+			// GetService<EviWebSocketHandler1> generates and populates a Message Object based on incoming WebSocket-Message.
+			// the other solution more variable solution is:
+			// GetService<EviWebSocketHandler> generates a dictionary of Key-Value-Pairs based on incoming WebSocket-Message.
+
+			// Here you can define the route for WebSockets
 			app.MapWebSocketManager("/api", serviceProvider.GetService<EviWebSocketHandler1>());
 			//app.MapWebSocketManager("/contrast", serviceProvider.GetService<EviWebSocketHandler1>());
 
